@@ -11,7 +11,7 @@ class BookListController extends AbstractController
     #[Route('/book', name: 'book')]
     public function index(): Response
     {
-        return $this->render('book_list/index.html.twig', [
+        return $this->render('book_list/booklist.html.twig', [
             'controller_name' => 'BookListController',
         ]);
     }

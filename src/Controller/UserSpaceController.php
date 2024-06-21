@@ -11,7 +11,7 @@ class UserSpaceController extends AbstractController
     #[Route('/user', name: 'user_space')]
     public function index(): Response
     {
-        return $this->render('user_space/index.html.twig', [
+        return $this->render('user_space/userspace.html.twig', [
             'controller_name' => 'UserSpaceController',
         ]);
     }
