@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Critic{% endblock %}
+
+{% block body %}
+    <h1>Critic</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ critic.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ critic.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ critic.content }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_creation</th>
+                <td>{{ critic.dateOfCreation ? critic.dateOfCreation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_last_update</th>
+                <td>{{ critic.dateOfLastUpdate }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_critic_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_critic_crud_edit', {'id': critic.id}) }}">edit</a>
+
+    {{ include('critic_crud/_delete_form.html.twig') }}
+{% endblock %}

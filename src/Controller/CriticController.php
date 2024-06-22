@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Critic;
 use App\Form\CriticType;
+use App\Repository\CriticRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CriticController extends AbstractController
 {
-    #[Route('book/critic', name: 'critic')]
-    public function index(): Response
+    #[Route('/critic', name: 'critic')]
+    public function index(CriticRepository $criticRepository): Response
     {
+        $critic = $criticRepository->findAll();
         return $this->render('critic/critic.html.twig', [
-            'controller_name' => 'CriticController',
+        'critics' => $critic,
         ]);
     }
 }

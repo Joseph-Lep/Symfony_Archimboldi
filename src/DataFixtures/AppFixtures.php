@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use App\Entity\User;
 use App\Entity\Books;
+use App\Entity\Critic;
 use App\Entity\Medium;
 use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
@@ -60,6 +61,17 @@ class AppFixtures extends Fixture
         
 $manager->persist($user);
 
+}
+
+for ($i = 0; $i <10; $i++) {
+    $critic = new Critic();
+    $critic
+->setTitle($faker->words($faker->numberBetween(2, 5), true))
+->setContent($faker->sentence($faker->numberBetween(2,5), true))
+->setDateOfCreation(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-2 months')))
+->setDateOfLastUpdate(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 week')));
+ 
+$manager->persist($user);
 }
 $manager->flush();
 }

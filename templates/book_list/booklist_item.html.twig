@@ -1,5 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <h1 class="text-4xl text-center">{{ book.title }}</h1>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{book.cover}}" class="img-fluid" alt="couv">
+            </div>
+            <div class="col-md-8">
+                <h1>Titre : {{book.title}}</h1>
+                <p class="text-bold">Auteur.ice : {{book.author}}
+                 <p class="text-bold">Edition : {{book.publisher}}
+                <div class="d-flex align-items-center">
+                    <div class="badge bg-success me-2">8</div>
+                    <p class="mb-0">Note moyenne</p>
+                </div>
+                <p class="mt-3">
+                    Résumé : {{book.backcover}}
+                </p>
+                <button class="btn btn-primary">En faire une critique</button>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3>Critiques</h3>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <h5 class="mb-1">Nom de l'utilisateur</h5>
+                        <small class="text-muted">Note : 7/10</small>
+                        <p class="mb-1">Critique de l'utilisateur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div class="list-group-item">
+                        <h5 class="mb-1">Nom de l'utilisateur</h5>
+                        <small class="text-muted">Note : 9/10</small>
+                        <p class="mb-1">Critique de l'utilisateur. Curabitur tincidunt, tortor a viverra pretium, leo erat bibendum lectus, nec vestibulum risus ex ut nulla.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
 {% endblock %}

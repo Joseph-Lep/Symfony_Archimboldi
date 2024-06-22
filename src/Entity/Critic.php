@@ -24,11 +24,12 @@ class Critic
     private ?\DateTimeInterface $date_of_creation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $date_of_last_update = null;
+    private ?\DateTimeInterface $date_of_last_update = null;
 
         public function __construct()
     {
         $this->date_of_creation = new \DateTime();
+        $this->date_of_last_update = new \DateTime();
     }
 
     public function getId(): ?int
@@ -72,12 +73,12 @@ class Critic
         return $this;
     }
 
-    public function getDateOfLastUpdate(): ?string
+    public function getDateOfLastUpdate(): ?\DateTimeInterface
     {
         return $this->date_of_last_update;
     }
 
-    public function setDateOfLastUpdate(?string $date_of_last_update): static
+    public function setDateOfLastUpdate(\DateTimeInterface $date_of_last_update): static
     {
         $this->date_of_last_update = $date_of_last_update;
 
