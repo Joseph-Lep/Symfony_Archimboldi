@@ -22,14 +22,14 @@ class BooksCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             TextField::new('author'),
             TextField::new('publisher'),
             DateTimeField::new('date_of_first_publish'),
             TextField::new('isbn'),
             TextField::new('serial'),
-            ImageField::new('cover'),
+            TextField::new('cover'),
             TextEditorField::new('backcover'),
             IntegerField::new('nbr_of_pages'),
             AssociationField::new('medium')->autocomplete()

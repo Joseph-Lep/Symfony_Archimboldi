@@ -174,11 +174,6 @@ class Books
     public static function loadValidatorMetadata(ClassMetadata $metadata): void
     {
         $metadata->addPropertyConstraint('ISBN', new Assert\Isbn([
-            'type' => Assert\Isbn::ISBN_10,
-            'message' => 'Erreur, l\'ISBN-10 n\'est pas valide.'
-        ]));
-
-        $metadata->addPropertyConstraint('ISBN', new Assert\Isbn([
             'type' => Assert\Isbn::ISBN_13,
             'message' => 'Erreur, l\'ISBN-13 n\'est pas valide.'
         ]));

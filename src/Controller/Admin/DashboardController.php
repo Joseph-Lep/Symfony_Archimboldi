@@ -14,19 +14,37 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(BooksCrudController::class)->generateUrl());
+        return $this->render('admin/admin.html.twig');
+    }
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
+    #[Route('/admin/books', name:'admin_books')]
+    public function crudBooks(AdminUrlGenerator $adminUrlGenerator): Response
+    {
+    $url = $adminUrlGenerator
+    ->setController(BooksCrudController::class)
+    ->generateUrl();
 
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        // return $this->render('some/path/my-dashboard.html.twig');
+    return $this->redirect($url);
+    }
+
+    #[Route('/admin/user', name:'admin_user')]
+    public function crudUser(AdminUrlGenerator $adminUrlGenerator): Response
+    {
+    $url = $adminUrlGenerator
+    ->setController(UserCrudController::class)
+    ->generateUrl();
+
+    return $this->redirect($url);
+    }
+
+    #[Route('/admin/critic', name:'admin_critic')]
+    public function crudCritic(AdminUrlGenerator $adminUrlGenerator): Response
+    {
+    $url = $adminUrlGenerator
+    ->setController(CriticCrudController::class)
+    ->generateUrl();
+
+    return $this->redirect($url);
     }
 
     public function configureDashboard(): Dashboard
