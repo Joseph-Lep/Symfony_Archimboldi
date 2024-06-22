@@ -32,8 +32,7 @@ class BooksCrudController extends AbstractCrudController
             ImageField::new('cover'),
             TextEditorField::new('backcover'),
             IntegerField::new('nbr_of_pages'),
-            AssociationField::new('medium')->renderAsEmbeddedForm(),
+            AssociationField::new('medium')->autocomplete()
         ];
-    }
-    
+    }   
 }

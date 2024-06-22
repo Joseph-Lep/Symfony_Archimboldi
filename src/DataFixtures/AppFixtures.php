@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
 ->setEmail($faker->email())
 ->setRoles(['ROLE_USER'])
 ->setPassword('azerty')
-->setAlias($faker->name($faker->numberBetween(1,5), true))
+->setAlias($faker->name($faker->numberBetween(1,5)))
 ->setDateOfCreation(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 month')))
 ->setDateOfLastConnect(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 day')))
 ->setAvatar($faker->imageUrl)
@@ -71,7 +71,7 @@ for ($i = 0; $i <10; $i++) {
 ->setDateOfCreation(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-2 months')))
 ->setDateOfLastUpdate(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 week')));
  
-$manager->persist($user);
+$manager->persist($critic);
 }
 $manager->flush();
 }

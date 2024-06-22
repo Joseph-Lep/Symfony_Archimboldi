@@ -1,22 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+
 <div class="container mt-5">
         <h1 class="mb-4">Dernières Critiques</h1>
         <div class="list-group">
-            <!-- Critique 1 -->
             <div class="list-group-item">
                 <div class="row">
-                    <div class="col-md-2">
+{% for critic in critics %}
+                    <div class="col-md-2 mb-3">
                         <img src="https://via.placeholder.com/100x150" class="img-fluid" alt="Image de l'œuvre">
                     </div>
                     <div class="col-md-8">
                         <h4>Titre : {{critic.title}} </h4>
-                        <p class="mb-1 text-muted">Ecrit par : {{user.alias}} </p>
+                        <p class="mb-1 text-muted">Ecrit par : X </p>
                         <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt, tortor a viverra pretium...</p>
                     </div>
                     <div class="col-md-2 text-end">
                         <div class="badge bg-success">7/10</div>
             </div>
+            {% endfor %}
           </div>
 </div>
 {% endblock %}

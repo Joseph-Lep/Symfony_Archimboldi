@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\BooksCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
