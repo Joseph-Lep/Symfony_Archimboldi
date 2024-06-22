@@ -16,7 +16,7 @@ class CriticController extends AbstractController
     #[Route('book/critic', name: 'critic')]
     public function index(): Response
     {
-        return $this->render('critic/index.html.twig', [
+        return $this->render('critic/critic.html.twig', [
             'controller_name' => 'CriticController',
         ]);
     }

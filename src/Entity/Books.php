@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\BooksRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BooksRepository;
 
 #[ORM\Entity(repositoryClass: BooksRepository::class)]
 class Books
@@ -26,7 +28,7 @@ class Books
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_of_first_publish = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 13, nullable: true)]
     private ?string $ISBN = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -40,6 +42,9 @@ class Books
 
     #[ORM\Column(nullable: true)]
     private ?int $nbr_of_pages = null;
+
+    #[ORM\ManyToOne(inversedBy: 'books_id')]
+    private ?Medium $medium = null;
 
     public function getId(): ?int
     {
@@ -153,4 +158,31 @@ class Books
 
         return $this;
     }
+
+    public function getMedium(): ?Medium
+    {
+        return $this->medium;
+    }
+
+    public function setMedium(?Medium $medium): static
+    {
+        $this->medium = $medium;
+
+        return $this;
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata): void
+    {
+        $metadata->addPropertyConstraint('ISBN', new Assert\Isbn([
+            'type' => Assert\Isbn::ISBN_10,
+            'message' => 'Erreur, l\'ISBN-10 n\'est pas valide.'
+        ]));
+
+        $metadata->addPropertyConstraint('ISBN', new Assert\Isbn([
+            'type' => Assert\Isbn::ISBN_13,
+            'message' => 'Erreur, l\'ISBN-13 n\'est pas valide.'
+        ]));
+    }
 }
+
+

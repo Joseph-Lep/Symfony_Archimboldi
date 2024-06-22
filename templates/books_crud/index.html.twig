@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Books index{% endblock %}
+
+{% block body %}
+    <h1>Books index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Date_of_first_publish</th>
+                <th>ISBN</th>
+                <th>Serial</th>
+                <th>Cover</th>
+                <th>Backcover</th>
+                <th>Nbr_of_pages</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.dateOfFirstPublish ? book.dateOfFirstPublish|date('Y-m-d') : '' }}</td>
+                <td>{{ book.ISBN }}</td>
+                <td>{{ book.serial }}</td>
+                <td>{{ book.cover }}</td>
+                <td>{{ book.backcover }}</td>
+                <td>{{ book.nbrOfPages }}</td>
+                <td>
+                    <a href="{{ path('app_books_crud_show', {'id': book.id}) }}">show</a>
+                    <a href="{{ path('app_books_crud_edit', {'id': book.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_books_crud_new') }}">Create new</a>
+{% endblock %}
