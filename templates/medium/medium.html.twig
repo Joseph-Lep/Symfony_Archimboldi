@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Medium
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5" style="height: 50em;"> 
+    <h1 class="text-center mb-4">Medium</h1> 
+
+    <div class="list-group m-2">
+        {% for medium in mediums %}
+            <a href="{{ path('medium_books', { id: medium.id }) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center m-2">
+                <span>{{ medium.name }}</span>
+                <span class="badge bg-primary rounded-pill m-1">articles</span>
+            </a>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                Rien :(
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
