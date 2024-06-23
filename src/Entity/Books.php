@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Doctrine\DBAL\Types\Types;
@@ -45,6 +47,17 @@ class Books
 
     #[ORM\ManyToOne(inversedBy: 'books_id')]
     private ?Medium $medium = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'books')]
+    private Collection $User_id;
+
+    public function __construct()
+    {
+        $this->User_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -177,6 +190,30 @@ class Books
             'type' => Assert\Isbn::ISBN_13,
             'message' => 'Erreur, l\'ISBN-13 n\'est pas valide.'
         ]));
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUserId(): Collection
+    {
+        return $this->User_id;
+    }
+
+    public function addUserId(User $userId): static
+    {
+        if (!$this->User_id->contains($userId)) {
+            $this->User_id->add($userId);
+        }
+
+        return $this;
+    }
+
+    public function removeUserId(User $userId): static
+    {
+        $this->User_id->removeElement($userId);
+
+        return $this;
     }
 }
 

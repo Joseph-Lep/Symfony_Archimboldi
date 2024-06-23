@@ -21,11 +21,11 @@
             </tr>
             <tr>
                 <th>Date_of_creation</th>
-                <td>{{ critic.dateOfCreation ? critic.dateOfCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ critic.dateOfCreation ? critic.dateOfCreation|date('Y-m') : '' }}</td>
             </tr>
             <tr>
                 <th>Date_of_last_update</th>
-                <td>{{ critic.dateOfLastUpdate }}</td>
+                <td>{{ critic.dateOfLastUpdate ? critic.dateOfLastUpdate|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>

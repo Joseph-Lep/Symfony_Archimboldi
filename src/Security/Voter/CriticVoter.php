@@ -2,14 +2,20 @@
 
 namespace App\Security\Voter;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class CriticVoter extends Voter
 {
     public const EDIT = 'POST_EDIT';
     public const VIEW = 'POST_VIEW';
+
+    public function __construct(
+        private Security $security
+      ) {
+      }
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -27,6 +33,10 @@ class CriticVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
+
+        if ($this->security->isGranted('ROLE_ADMIN') || $subject->getAuthor() === $user) {
+            return true;
+          }
 
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {

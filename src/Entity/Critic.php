@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CriticRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CriticRepository;
 
 #[ORM\Entity(repositoryClass: CriticRepository::class)]
 class Critic

@@ -13,6 +13,8 @@
                 <th>Content</th>
                 <th>Date_of_creation</th>
                 <th>Date_of_last_update</th>
+                <th>Ecrit par</th>
+
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,7 +25,8 @@
                 <td>{{ critic.title }}</td>
                 <td>{{ critic.content }}</td>
                 <td>{{ critic.dateOfCreation ? critic.dateOfCreation|date('Y-m') : '' }}</td>
-                <td>{{ critic.dateOfLastUpdate|date('Y-m-d') }}</td>
+                <td>{{ critic.dateOfLastUpdate ? critic.dateOfLastUpdate|date('Y-m-d') }}</td>
+                <td>User</td>
                 <td>
                     <a href="{{ path('app_critic_crud_show', {'id': critic.id}) }}">show</a>
                     <a href="{{ path('app_critic_crud_edit', {'id': critic.id}) }}">edit</a>

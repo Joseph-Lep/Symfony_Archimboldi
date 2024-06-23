@@ -21,8 +21,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Assert\Email(info : "L'Email n'est pas valide")]
-    #[Assert\NotBlank(info : "Ce champ est obligatoire")]
+    #[Assert\Email(message: "L'Email n'est pas valide")]
+    #[Assert\NotBlank(message: "Ce champ est obligatoire")]
     private ?string $email = null;
 
     /**
@@ -61,9 +61,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Critic::class, mappedBy: 'user_id')]
     private Collection $critics;
 
+    /**
+     * @var Collection<int, Books>
+     */
+    #[ORM\ManyToMany(targetEntity: Books::class, mappedBy: 'User_id')]
+    private Collection $books;
+
     public function __construct()
     {
         $this->critics = new ArrayCollection();
+        $this->books = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -226,6 +233,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($critic->getUserId() === $this) {
                 $critic->setUserId(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Books>
+     */
+    public function getBooks(): Collection
+    {
+        return $this->books;
+    }
+
+    public function addBook(Books $book): static
+    {
+        if (!$this->books->contains($book)) {
+            $this->books->add($book);
+            $book->addUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Books $book): static
+    {
+        if ($this->books->removeElement($book)) {
+            $book->removeUserId($this);
         }
 
         return $this;

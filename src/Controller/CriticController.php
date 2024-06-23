@@ -34,4 +34,10 @@ class CriticController extends AbstractController
             'critics' => $critic,
             ]);
 }
+
+#[Route('/critic/{id}', name: 'critic_list')]
+public function item(Critic $critic): Response
+{
+    return $this->render('critic/critic_item.html.twig', ['critic' => $critic]);
+}
 }
