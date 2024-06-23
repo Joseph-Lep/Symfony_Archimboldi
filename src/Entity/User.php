@@ -37,6 +37,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4)]
+    
     private ?string $alias = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

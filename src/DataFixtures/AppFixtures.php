@@ -10,12 +10,20 @@ use App\Entity\Medium;
 use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
     private const NB_ARTICLES = 33;
 
     private const MEDIUM= ["Roman", "BD", "Essai", "Sciences", "Jeunesse"];
+
+    public function __construct(
+        private UserPasswordHasherInterface $passwordHasher
+    ) {
+
+    }
+
 
     public function load(ObjectManager $manager): void
     {
@@ -52,8 +60,8 @@ class AppFixtures extends Fixture
         $user
 ->setEmail($faker->email())
 ->setRoles(['ROLE_USER'])
-->setPassword('azerty')
-->setAlias($faker->name($faker->numberBetween(1,5)))
+->setPassword($this->passwordHasher->hashPassword($user, 'azerty'))
+->setAlias($faker->name($faker->numberBetween(5,12)))
 ->setDateOfCreation(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 month')))
 ->setDateOfLastConnect(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 day')))
 ->setAvatar($faker->imageUrl)
