@@ -6,6 +6,8 @@ use App\Entity\Critic;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CriticType extends AbstractType
 {
@@ -13,7 +15,7 @@ class CriticType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content')
+            ->add('content', TextareaType::class)
             ->add('date_of_creation', null, [
                 'widget' => 'single_text',
             ])

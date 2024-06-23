@@ -26,6 +26,9 @@ class Critic
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_of_last_update = null;
 
+    #[ORM\ManyToOne(inversedBy: 'critics')]
+    private ?User $user_id = null;
+
         public function __construct()
     {
         $this->date_of_creation = new \DateTime();
@@ -81,6 +84,18 @@ class Critic
     public function setDateOfLastUpdate(\DateTimeInterface $date_of_last_update): static
     {
         $this->date_of_last_update = $date_of_last_update;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): static
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }
